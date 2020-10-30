@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link type="text/css" rel="stylesheet" href="style.css">
+  <title>Lista de Tareas</title>
+ <script src="jquery-3.5.1.min.js"></script>
+ <script>
+    $(document).ready(function(){
+      
+        //Agregar Tarea
+        $("#btn-agregar").click(agregarTarea);
+        
+        //Eliminar Tarea
+        var tareas=document.querySelectorAll("#lista li");
+        var papeleras=document.querySelectorAll("#lista img");
+        for(var i=0;i<tareas.length-1;i++){
+          tareas[i].addEventListener("click", eliminarTarea(tareas[i]));
+        }
+
+     });
+
+    function agregarTarea(){
+      var valorTareaInput=$("#tareaInput").val();
+      if(valorTareaInput!=''){
+        $("#lista").append("<li>"+ valorTareaInput+"<img class='papelera' src='delete.png'></li>");
+        $("#tareaInput").val(null);
+
+        var tareas=document.querySelectorAll("#lista li");
+        var papeleras=document.querySelectorAll("#lista img");
+        for(var i=0;i<tareas.length;i++){
+          tareas[i].addEventListener("click", eliminarTarea);
+       }
+        
+      }
+    }
+
+    function eliminarTarea(i){
+      $(this).remove();
+    }
+  </script>
+
+  </head>
+  <body>
+    <div class="principal">
+      <div class="wrap">
+        
+        <form class="formulario" action="">
+          <h1>TO DO LIST</h1>
+          <input type="text" id="tareaInput" placeholder="Agrega tu tarea">
+          <div class="tareas">
+            <div class="wrap">
+              <ul class="lista" id="lista">
+                
+              </ul>
+            </div>
+          </div>
+          <input type="button" class="boton" id="btn-agregar" value="Agregar Tarea">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
